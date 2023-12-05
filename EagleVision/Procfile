@@ -1,1 +1,1 @@
-web: cd EagleVision/ && gunicorn EagleVision.wsgi
+gunicorn EagleVision.wsgi

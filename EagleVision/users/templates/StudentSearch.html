@@ -1,0 +1,350 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <title>Student Search</title>
+        <script src="https://kit.fontawesome.com/306c431a08.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'users/css/StudentSearch.css' %}">  
+
+    </head>
+
+    <body>
+        <header class="header container-fluid fixed-top">
+            <div class="logo">
+                <img src="https://cdn.freebiesupply.com/logos/large/2x/boston-college-eagles-2-logo-png-transparent.png" alt="Eagle Vision Logo">
+                {% if user.is_student %}
+                    <h1>Eagle Vision</h1>
+                {% else %}
+                    <h1>Eagle Vision Admin</h1>
+                {% endif %}
+            </div>
+            <div class="user-menu">
+                <span class="user-menu-text" aria-haspopup="true" aria-expanded="false" >{{ request.user.first_name }} {{ request.user.last_name }}
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Chevron-icon-drop-down-menu-WHITE.png" style="height: 10px;">
+                </span>
+                <div class="dropdown-menu">
+                    <a href="{% url 'update_profile' %}" class="dropdown-item">Profile</a>
+                    <a href="{% url 'logout_view' %}" class="dropdown-item">Sign Out</a>
+                </div>
+            </div>
+        </header>
+
+        <div className = "student-search-page" style="margin-top: 60px;">
+            <ul class="nav nav-tabs">
+                {% if user.is_student %}
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Search</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'student_watchlist' %}">Watchlist</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link " aria-current="page" href="{% url 'admin_dash' %}">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="{% url 'admin_reports' %}">Reports</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'student_search' %}">Student View</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'student_watchlist' %}">Watchlist</a>
+                    </li>
+                {% endif %}
+                    
+                    
+            </ul>
+
+            <div class="complete-search">
+                <div class="course-search-bar">
+                    <nav class="navbar navbar-light bg-light">
+                        <form class="form-inline searchbox-button-group" method="get" action="{% url 'student_search' %}">
+                            <input class="form-control mr-sm-2" type="search" name="search_query" placeholder="Course Name or Code" aria-label="Search">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+                      </nav>
+                </div>
+                <div class="search-area">
+
+                    <div class="facet-container">
+                        <h1>Filter Results</h1>
+                        <form id="filterForm" method="get" action="{% url 'student_search' %}">
+                            <div class="accordion" id="accordionExample">
+                                <div class="card">
+                                <div class="card-header" id="headingOne">
+                                    <h5 class="mb-0">
+                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="color: black;">
+                                        School 
+                                    </button>
+                                    </h5>
+                                </div>
+                            
+                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne">
+                                    <div class="card-body school-facet-checks">
+                                        {% for school in all_schools %}
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="school_filter" value="{{ school }}" id="schoolCheck{{ forloop.counter }}">
+                                                <label class="form-check-label" for="schoolCheck{{ forloop.counter }}">
+                                                    {{ school }}
+                                                </label>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                
+                                </div>
+                                <div class="card">
+                                <div class="card-header" id="headingTwo">
+                                    <h5 class="mb-0">
+                                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="color: black;">
+                                        Subject
+                                    </button>
+                                    </h5>
+                                </div>
+                                <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo">
+                                    <div class="card-body subject-facet-checks">
+                                        {% for sub in facet_subjects %}
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="{{ sub.code }}" id="subjectCheck{{ forloop.counter }}" name="subjectCheck">
+                                                <label class="form-check-label" for="subjectCheck{{ forloop.counter }}">
+                                                    {{ sub.code }}
+                                                </label>
+                                            </div>
+                                        {% endfor %}
+    
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="card">
+                                <div class="card-header" id="headingThree">
+                                    <h5 class="mb-0">
+                                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="color: black;">
+                                        Credits
+                                    </button>
+                                    </h5>
+                                </div>
+                                <div id="collapseThree" class="collapse show" aria-labelledby="headingThree">
+                                    <div class="card-body credit-facet-check">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="credit_filter" value="1" id="defaultCheck1">
+                                            <label class="form-check-label" for="defaultCheck1">
+                                            1 Credit
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="credit_filter" value="2" id="defaultCheck1">
+                                            <label class="form-check-label" for="defaultCheck1">
+                                            2 Credits
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="credit_filter" value="3" id="defaultCheck1">
+                                            <label class="form-check-label" for="defaultCheck1">
+                                            3 Credits
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="credit_filter" value="4" id="defaultCheck1">
+                                            <label class="form-check-label" for="defaultCheck1">
+                                            4 or more credits
+                                            </label>
+                                        </div>                        
+                                    </div>
+                                </div>
+                                </div>
+                                <button type="submit" style="padding: 10px; margin: 20px;">Apply Filters</button>
+                            </div>
+                        </form>
+                    </div>
+
+                <div class="search-results-container">
+                    <h1>Matching Courses:</h1>
+                    {% if page_obj|length == 0 %}
+                    <div class="no-results-flag">
+                        <h5>No courses match your search. Please try searching by a course name, course code, or subject code.</h5>
+                        <h5>You can also use the filters to help you search!</h5>
+                    </div>
+                    {% endif %}
+                    {% for course in page_obj %}
+                        <div class="course-listing-info">
+                            <!-- Course Information -->
+                            <div class="title-bell-line">
+                                <div class="course-title-notification">
+                                    <h3>{{ course.name }}</h3>
+                                    <!-- Notification Icon Section (currently commented out) -->
+                                </div>
+                            </div>
+                            
+                            <!-- Additional Course Details -->
+                            <h4><!-- School Name --></h4>
+                            <h4>{{ course.credit_option }} Credits</h4>
+                            <p>{{ course.description|striptags|safe }}</p>
+
+                            <!-- Collapsible Section Trigger and Content -->
+                            <label for="toggle-{{ course.id }}" class="collapsible-label">Sections <i class="fa fa-chevron-down collapsible-arrow"></i></label>
+                            <input type="checkbox" id="toggle-{{ course.id }}" class="collapsible-checkbox">
+                            <div class="sections-container">
+                                {% if course.sections.all %}
+                                    {% for section in course.sections.all %}
+                                        <div class="section-box">
+                                            <p style="font-weight: bold;">Section: {{ section.number }}</p>
+                                            <p>Timeslot: {{ section.timeslot }}</p>
+                                            <p>Professor: {{ section.professor }}</p>
+                                            <p>Seats: {{ section.used_seats }} / {{ section.total_seats }}</p>
+                                            <div class="section-notifications">
+                                                <form method="post" action="{% url 'add_to_watchlist' %}">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="section_id" value="{{ section.id }}">
+                                                    <span class="desired-seats-sel">
+                                                        <h5>Desired number of seats:</h5>
+                                                        <select name='desired_seats' class="form-select" aria-label="Default select example">
+                                                            <option selected value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                        </select>
+                                                    </span>
+                                                    <button type="submit" class="btn btn-dark" value="value">Add to Watchlist</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    <div class="section-box">
+                                        <p>No sections currently offered</p>
+                                    </div>
+                                {% endif %}
+                                    
+                            </div>
+                        </div>
+                    {% endfor %}      
+                </div>
+            
+            </div>
+        </div>
+
+
+
+
+<!-- NEW PAGINATION with DJANGO -->
+
+        <div class="pagination-container">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    {% if page_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page=1" aria-label="First">
+                                <span aria-hidden="true">&laquo;&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
+                        </li>
+                    {% endif %}
+
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.number }}" style="font-weight: bolder;">{{ page_obj.number  }}</a>
+                        </li>
+                        
+                    {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Last">
+                                <span aria-hidden="true">&raquo;&raquo;</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+
+
+           
+        
+            <!-- Popup Overlay -->
+            <div id="popup" class="overlay">
+                <!-- Popup Content -->
+                <div class="popup">
+                    <span class="close-button"><a href="#">X</a></span>
+                    <h1>Customize Notifications</h1>
+                    <span>
+                        <p>Number of Seats Remaining: </p>
+                        <div class="form-group">
+                            <select class="form-control" id="exampleFormControlSelect1">
+                              <option>1</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option>4</option>
+                              <option>5</option>
+                            </select>
+                          </div>
+
+                    </span>
+                    <span>
+                        <p>Course Section: </p>
+                        <div class="form-group sections-check-notif">
+                              <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                    <label class="form-check-label" for="defaultCheck1">
+                                    Section 01
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                    <label class="form-check-label" for="defaultCheck1">
+                                    Section 02
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                    <label class="form-check-label" for="defaultCheck1">
+                                    Section 03
+                                    </label>
+                                </div>
+                            </select>
+                          </div>
+
+                    </span>
+                    <span  class="pop-up-btns">
+                        <span class="popup-button cancel-button"><a href="#" ><button>Cancel</button></a></span>
+                        <span class="popup-button cancel-button"><a href="./StudentWatchList.html" ><button>Add Notifcation</button></a></span>
+                        
+                    </span> 
+                </div>
+            </div>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    </body>
+
+</html>
+
+
+<script>
+    // Get a reference to the login button
+    const watchListButton = document.getElementById("watchListButton");
+  
+    // Add a click event listener to the login button
+    watchListButton.addEventListener("click", function () {
+      // Redirect to the StudentSearch.html page
+      window.location.href = "StudentWatchList.html";
+    });
+  </script>

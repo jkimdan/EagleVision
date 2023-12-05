@@ -1,0 +1,49 @@
+.gradient-custom-2 {
+    /* fallback for old browsers */
+    background: #fccb90;
+    
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+    
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to bottom, rgba(178, 157, 108, 0.75), rgba(178, 157, 108), rgba(138, 16, 11, 0.8));
+}
+    
+    @media (min-width: 768px) {
+    .gradient-form {
+    height: fit-content !important;
+    }
+    }
+    @media (min-width: 769px) {
+    .gradient-custom-2 {
+    border-top-right-radius: .3rem;
+    border-bottom-right-radius: .3rem;
+    }
+    }
+
+.login-btn {
+    background-color: rgba(138, 16, 11, 0.8);
+    color: white;
+
+}
+
+.login-btn :hover {
+    background-color: white;
+    color: rgba(138, 16, 11, 0.8);
+}
+
+.login-box-complete {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
+}
+
+.register-btn {
+    background-color: rgba(138, 16, 11, 0.8);
+    color: white;
+    border: none;  /* This will remove the default button border */
+}
+
+.register-btn:hover {
+    background-color: white;
+    color: rgba(138, 16, 11, 0.8);
+}

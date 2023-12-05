@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Update Profile</title>
+    <!-- Include necessary CSS links -->
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    {% load static %}
+    <link rel="style" href="../static/users/css/UpdateInfo.css">
+    <link rel="stylesheet" href="{% static 'users/css/UpdateInfo.css' %}">
+
+</head>
+<body>
+    <div class="updateinfo-page">
+        <div class="update-container">
+            <h2>Update Profile Information</h2>
+            <form method="post" action="{% url 'update_profile' %}">
+                {% csrf_token %}
+                {{ form.as_p }}  <!-- This will render the fields for your form -->
+                <div class="buttondiv center" >
+                    <button class="center" type="submit">Update Profile</button>
+                </div>
+            </form>
+            <a class='center' href="{% url 'student_search' %}">Skip for now</a>
+        </div>
+    </div>
+</body>
+</html>

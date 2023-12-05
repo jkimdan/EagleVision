@@ -1,0 +1,12 @@
+.course-listing-info .remove-btn h3{
+    font-size: 10px;
+
+}
+
+.remove-btn h3 :hover {
+    text-decoration: underline;
+}
+
+.watchlist-container {
+    padding-top: 30px;
+}

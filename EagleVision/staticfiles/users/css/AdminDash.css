@@ -1,0 +1,298 @@
+.header {
+    background-color: #8a100b;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.watchlist-header h1 {
+    font-size: x-large;
+    font-weight: bold;
+    padding-bottom: 10px;
+    padding-left: 5px;
+}
+/* Logo and title styles */
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo h1 {
+    font-size: x-large;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin-top: 5px;
+}
+
+.logo img {
+    width: 40px; /* Adjust the width as needed */
+    height: auto;
+    margin-right: 10px;
+}
+
+/* User menu styles */
+.user-menu {
+    position: relative;
+}
+
+.user-menu-text {
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+/* Dropdown menu styles */
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #8a100b;
+    color: white;
+    display: none;
+    flex-direction: column;
+    border: 1px solid white;
+    margin-right: 50px;
+}
+
+.user-menu:hover .dropdown-menu {
+    display: flex;
+}
+
+.dropdown-item {
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+.dropdown-item:hover {
+    background-color: #b29d6c; /* Hover color */
+}
+
+
+
+/* Facet Styling */
+
+.facet-container {
+    width: 200px;
+
+}
+.facet-container h1 {
+    font-size: 1rem;
+    font-weight: bold;
+    padding-top: 10px;
+    padding-left: 5px;
+
+
+}
+
+.form-check-label {
+    color: rgb(97, 93, 93);
+}
+
+.form-check {
+    padding-left: 40px;
+    padding-bottom: 50px;
+}
+
+/* Page Layout */
+.dash-contents {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 40px;
+    height:1000px;
+
+}
+
+
+/* Dashboard metric boxes */
+
+.dash-main {
+    height: fit-content;
+    width: 800px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 10px;
+
+}
+
+.dash-main h1{
+    font-size: xx-large;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding: 10px;
+    padding-bottom: 10px;
+}
+.dash-main h4 {
+    font-size: medium;
+    font-style: italic;
+    color: rgb(82, 79, 79);
+    padding: 10px;
+    padding-top: 0px;
+    padding-left: 15px;
+}
+
+.state-desc {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+   
+}
+
+.fa {
+    margin-top: -7px;
+    padding-left: 6px;
+}
+
+
+
+.top5-metrics {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+}
+.top5-metrics p {
+    color: #007bff;
+}
+.see-all-tag {
+    padding-top: 20px;
+    font-weight: normal;
+}
+
+.see-all-tag:hover{
+    text-decoration: underline;
+}
+
+.fa-arrow-right{
+    padding-left: 5px;
+}
+
+.dashboard-sections{
+    margin-top: 35px;
+}
+
+
+
+/* secondary section of dashboard metrics */
+
+.dashboard-secondary-container {
+    display: flex;
+    width: 90%;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 20px;
+
+}
+ 
+.secondary-section {
+    margin-top: 30px;
+    height: 200px;
+    width: 50%;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+
+.word-name {
+    font-size: large;
+    /* font-weight: bold; */
+}
+
+.section1 {
+    background-color: #f2f2f2;
+}
+.section2 {
+    background-color: #f2f2f2;
+}
+.section3 {
+    background-color: #f2f2f2;
+}
+.underline {
+    font-size: small;
+    color: rgb(48, 53, 66);
+    font-style: normal;
+    
+}
+
+.underline:hover {
+    text-decoration: underline;
+}
+
+.top5-listitem li {
+    font-size: large;
+    font-weight: bold;
+    padding-bottom: 2px;
+    padding-top: 5px;
+}
+
+/* Table styling */
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+
+/* State toggle */
+
+.state-toggler p{
+    font-size: x-large;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding: 10px;
+    padding-bottom: 0px;
+}
+
+.state-toggler {
+    padding-left: 20px;
+}
+
+
+.secondary-section i  {
+    padding-bottom: 10px;
+}
+
+
+.state-desc {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    border-top: 2px solid #ddd; /* Light gray border on top */
+    padding-top: 15px;
+    background: linear-gradient(to bottom, #ffffff, #f9f9f9); /* Gradient from white to light gray */
+}
+
+.state-desc h4 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 5px 0;
+    color: #333; /* Dark text color */
+}
+
+.state-desc i {
+    font-size: 2rem;
+    margin-top: 10px;
+}
+

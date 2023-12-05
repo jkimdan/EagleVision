@@ -1,0 +1,163 @@
+/* Course report title */
+
+.course-title-download{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 20px;
+    justify-content: center;
+    text-align: center;
+
+}
+.course-title-download h1 {
+    padding-bottom: 10px;
+    margin: 0;
+
+}
+
+
+.course-title-download p:hover {
+    text-decoration: underline;
+}
+
+.back-section {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-top: 20px;
+}
+.back-section i {
+    margin-top: 4px;
+}
+
+.back-section p:hover {
+    text-decoration: underline;
+}
+/* Analytics section styles */
+
+.charts-section .pie-chart {
+    width: 45%;
+    height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+
+.charts-section .chart-graph {
+    width: 45%;
+    height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.charts-section{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    padding: 20px;
+}
+
+.charts-section img {
+    width: auto;
+    height: 250px;
+}
+.report-analytics-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 30px;
+}
+
+.analytics-bottom-section {
+    width: 90%;
+    height: 200px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;   
+}
+
+.analytics-bottom-section h2 {
+    padding: 20px;
+    padding-bottom: 10px;
+}
+.analytics-bottom-section p {
+    padding: 0;
+    margin: 0;
+    padding-bottom: 5px;
+}
+
+.analytics-bottom-section h5 {
+    color: rgb(71, 66, 66);
+    font-size: medium;
+    text-decoration: underline;
+    padding-top: 10px;
+
+}
+
+.watchlist-title {
+    display: flex;
+    flex: row;
+    align-items: center ;
+    
+}
+
+
+.watchlist-names h1 {
+    padding: 10px;
+
+}
+
+.watchlist-names {
+    padding: 30px;
+    padding-bottom: 100px;
+}
+
+.to-top h5{
+    color: rgb(66, 61, 61);
+    font-size: medium;
+}
+
+.to-top h5:hover {
+    text-decoration: underline;
+}
+
+.to-top {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+    align-items: center;
+    padding-bottom: 40px;
+}
+
+
+.download-icon:hover {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+
+.watchlist-student-chart h5{
+    font-size: medium;
+    font-style: italic;
+    padding: 15px;
+    color: maroon;
+
+}

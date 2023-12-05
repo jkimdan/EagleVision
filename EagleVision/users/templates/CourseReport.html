@@ -1,0 +1,180 @@
+{% load static %}
+<!DOCTYPE html>
+
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <title>{{course.name}}Course Report</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'users/css/AdminDash.css' %}">
+        <link rel="stylesheet" href="{% static 'users/css/CourseReport.css' %}">                    
+        <!-- font awesome -->
+         <script src="https://kit.fontawesome.com/306c431a08.js" crossorigin="anonymous"></script>
+         
+    </head>
+
+    <body>
+        <header class="header container-fluid">
+            <div class="logo">
+                <img src="https://cdn.freebiesupply.com/logos/large/2x/boston-college-eagles-2-logo-png-transparent.png" alt="Eagle Vision Logo">
+                <h1>Eagle Vision Admin</h1>
+            </div>
+            <div class="user-menu">
+                <span class="user-menu-text" aria-haspopup="true" aria-expanded="false" >{{ user.get_full_name }} 
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Chevron-icon-drop-down-menu-WHITE.png" style="height: 10px;">
+                </span>
+                <div class="dropdown-menu">
+                    <a href="#" class="dropdown-item">Settings</a>
+                    <a href="./LoginPage.html" class="dropdown-item">Sign Out</a>
+                </div>
+            </div>
+        </header>
+
+
+        <div class="course-report container">
+            <div class="report-title-section ">
+                <div class="back-section" >
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <a href="{% url 'admin_reports' %}">Back to Course List</a>
+                </div>
+                <div class="course-title-download">
+                    <h1>{{course.name}}</h1>
+                    <p>
+                        Download Report
+                        <i class="fa-regular fa-circle-down"></i>
+                    </p>
+                   
+                    
+                </div>
+                
+                <div id="accordion" class="report-sections-dropdown">
+                    <div class="card">
+                      <div class="card-header" id="headingOne">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="color: black; ">
+                                Sections
+                                <img src="https://static.thenounproject.com/png/5776622-200.png" alt="show sections button" style="width: 35px; padding-bottom: 5px;">                        
+                            </button>
+                        </h5>
+                      </div>
+                  
+                      <div id="collapseOne" class="collapse " aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body">
+                            {% if course.sections.all %}
+                                {% for section in course.sections.all %}
+                                    <li>{{ section.number }} - {{ section.timeslot }} - {{ section.professor }}</li>
+                                {% endfor %}
+                            {% else %}
+                                <li>No sections currently offered for {{course.name}}</li>
+                            {% endif %}
+                        </div>
+                      </div>
+                    </div> 
+                </div>
+
+            </div>
+            <!-- end of title and sections -->
+
+            <!-- report analytics -->
+            <div class="report-analytics-section">
+                <div class="charts-section comtainer">
+                    <div class="chart-graph">
+                        <i class="fas fa-5x fa-graduation-cap"></i>
+                        <p style="font-weight: bold;">Number of students watching by grade:</p>
+                        <p>
+                            {% regroup course.students_watching by graduation_year as students_by_year %}
+                            {% for group in students_by_year %}
+                                {{ group.grouper }}: {{ group.list|length }} students
+                            {% endfor %}
+                         </p>
+                         {% if not course.students_watching %}
+                            <p>No students are watching {{course.name}}</p>
+                        {% endif %}
+                         
+                        
+                    </div>
+                    <div class="pie-chart">
+                        <i class="fas fa-5x fa-eye"></i>
+                        <p>
+                            {% if most_watched_section %}
+                                Section {{ most_watched_section.number }} has the most watches: {{ most_watched_section.watch_count }} watch(es)
+                            {% else %}
+                                No sections available
+                            {% endif %}
+                        </p>
+                        
+                                            </div>
+                </div>
+             
+
+            </div>
+            <!-- end of report analystics -->
+
+            <div class="watchlist-names container">
+                
+                <div class="watchlist-student-chart container">
+                    <h2>Watchlist: </h2>
+                    <a href="{% url 'generate_watchlist_pdf' course.code %}">Download Watchlist PDF</a>
+                    <table class="student-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Student Name</th>
+                                <th>YOG</th>
+                                <th>Email</th>
+                                <th>School</th>
+                                <th>Major</th>
+                                <th>Sections</th>
+                                <th>Desired Seats</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for student in course.students_watching %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ student.first_name }} {{student.last_name}}</td>
+                                    <td>{{student.graduation_year}}</td>
+                                    <td>{{ student.email }}</td>
+                                    <td>{{ student.school }}</td>
+                                    <td>{{ student.major }}</td>
+                                    <td>
+                                        {% for course_watch in student.course_watches.all %}
+                                            {% if course_watch.section.course == course %}
+                                                Section {{ course_watch.section.number}}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </td>
+                                    <td>
+                                        {% for course_watch in student.course_watches.all %}
+                                            {% if course_watch.section.course == course %}
+                                                {{ course_watch.desired_seats }}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% if not course.students_watching %}
+                        <h5>No students are watching {{course.name}}</h5>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="to-top">
+                <h5><a href="#" style=color:black>Back to Top</h5></a>
+                <a href="AdminReports.html"></a>     
+                <a href="{% url 'admin_reports' %}">
+                    <button type="button" class="btn btn-danger" >Close Report</button>
+                </a>
+  
+            </div>
+            
+
+        </div>
+        
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    </body>
+</html>
+

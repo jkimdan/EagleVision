@@ -6,7 +6,7 @@ from .utils import send_course_update_email
 
 
 #change schedule for testing
-@background(schedule=20)
+@background(schedule=600)
 def update_course_and_section_data():
     print("test")
     subjects = ['AADS', 'BIOL', 'CHEM', 'COMM', 'CSCI', 'ECON', 'ENGL', 'MATH', 'MFIN', 'NURS', 'POLI']

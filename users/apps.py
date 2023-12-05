@@ -5,4 +5,4 @@ class YourAppConfig(AppConfig):
 
     def ready(self):
         from .tasks import update_course_and_section_data
-        update_course_and_section_data(repeat=20)
+        update_course_and_section_data(repeat=600)

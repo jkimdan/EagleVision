@@ -31,6 +31,9 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
+CSRF_TRUSTED_ORIGINS = [
+    'eaglevision-production.up.railway.app'
+]
 
 ENV_FILE = find_dotenv()
 if ENV_FILE:

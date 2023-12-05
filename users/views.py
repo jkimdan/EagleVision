@@ -203,7 +203,7 @@ def student_watchlist(request):
     user = request.user
 
     user_watchlist = list(user.course_watches.all())
-    return render(request, 'StudentWatchlist.html', {'users': user, 'courses': user_watchlist})
+    return render(request, 'StudentWatchList.html', {'users': user, 'courses': user_watchlist})
 # TO DO: 
 # Create a view for the add notifactionbutton --> will be different becauseit 
 # Will need to process the request and add the course to the watchlsit, thenswitchto watchlsit page 

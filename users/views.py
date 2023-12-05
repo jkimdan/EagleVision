@@ -232,7 +232,7 @@ def add_to_watchlist(request):
         # Check if the user already has this section in their watchlist
         if not user.course_watches.filter(section=section).exists():
             # If not, create a new CourseWatch instance
-            course_watch = CourseWatch.objects.create(section=section, desired_seats=desired_seats)
+            course_watch = CourseWatch.objects.create(user=user, section=section, desired_seats=desired_seats)
 
             # Add the course_watch to the user's watchlist
             user.course_watches.add(course_watch)

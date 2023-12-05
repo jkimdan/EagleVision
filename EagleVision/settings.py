@@ -27,12 +27,12 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, "webappexample", "templates")
 SECRET_KEY = 'django-insecure-qn7vv&x^0==rk%avk^qny2u8mb+sgzs^7p#ap(!2bsu^aajoby'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
 CSRF_TRUSTED_ORIGINS = [
-    'eaglevision-production.up.railway.app'
+    'https://eaglevision-production.up.railway.app'
 ]
 
 ENV_FILE = find_dotenv()

@@ -1,1 +1,1 @@
-web: ls && gunicorn EagleVision.wsgi
+web: python manage.py migrate && python manage.py process_tasks && gunicorn EagleVision.wsgi

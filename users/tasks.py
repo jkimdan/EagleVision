@@ -11,7 +11,7 @@ def update_course_and_section_data():
     print("test")
     subjects = ['AADS', 'BIOL', 'CHEM', 'COMM', 'CSCI', 'ECON', 'ENGL', 'MATH', 'MFIN', 'NURS', 'POLI']
     for subject_code in subjects:
-        response = requests.get(f'http://localhost:8080/waitlist/waitlistcourseofferings?termId=kuali.atp.FA2023-2024&code={subject_code}')
+        response = requests.get(f'https://web-production-bbf2.up.railway.app/waitlist/waitlistcourseofferings?termId=kuali.atp.FA2023-2024&code={subject_code}')
         if response.status_code == 200:
             courses_data = response.json()
             subject_instance, _ = Subject.objects.update_or_create(code=subject_code, defaults={'name': subject_code})
@@ -28,7 +28,7 @@ def update_course_and_section_data():
 
                     course_offering_id = course_offerings.get('id', '')
                     if course_offering_id:
-                        activity_response = requests.get(f'http://localhost:8080/waitlist/waitlistactivityofferings?courseOfferingId={course_offering_id}')
+                        activity_response = requests.get(f'https://web-production-bbf2.up.railway.app/waitlist/waitlistactivityofferings?courseOfferingId={course_offering_id}')
                         if activity_response.status_code == 200:
                             sections_data = activity_response.json()
 

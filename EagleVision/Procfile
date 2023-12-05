@@ -1,1 +1,1 @@
-web: cd ./EagleVision && python manage.py migrate && gunicorn YourProjectName.wsgi
+web: cd ./EagleVision && python manage.py migrate && gunicorn EagleVision.wsgi

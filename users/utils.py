@@ -4,7 +4,7 @@ from .models import Course, Section
 
 def send_course_update_email(email, seats, course: Course, section: Section):
     subject = f'Update on {course.name}'
-    message = f'Hello,\n\nThere are now {seats} seats available in the course:\n\n{course.name}\n{section.professor}\n{section.timeslot}\nClick here to view EagleApps Registration: https://eaen.bc.edu/student-registration/#/\n\nBest,\nEagleVision Notification System'
+    message = f'Hello,\n\nThere are now {seats} seats available in the course:\n\n{course.name}\n{section.professor}\n{section.timeslot}\nClick here to view EagleApps Registration: https://eaen.bc.edu/student-registration\n\nBest,\nEagleVision Notification System'
     email_from = settings.EMAIL_HOST_USER
     recipient_list = [email]
     

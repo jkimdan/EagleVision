@@ -64,7 +64,7 @@ def callback(request):
 
     email = user_info.get('email')
 
-    if email and email.endswith('bc.edu'):
+    if email and (email.endswith('bc.edu') or email.endswith('wm.edu')):
         # Use the email as the username as well
         user, created = CustomUser.objects.get_or_create(username=email, defaults={
             'email': email,

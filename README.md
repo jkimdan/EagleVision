@@ -1,1 +1,1 @@
-This is a public repository for hosting purposes. Full commit history and changes are logged in a private repository elsewhere.
+This is a public repository for hosting purposes. Full commit history and changes are logged in a private repository elsewhere. This repository is not meant to be run locally and will not deploy properly, even with proper environment setup. 
